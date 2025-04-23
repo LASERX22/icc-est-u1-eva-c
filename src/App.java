@@ -1,6 +1,9 @@
+import Controllers.BookController;
+import Models.Book;
+import Views.ViewConsole;
+
 public class App {
     public static void main(String[] args) throws Exception {
-
         Book[] books = {
                 new Book("Clean Code", 2008),
                 new Book("The Pragmatic Programmer", 1999),
@@ -33,6 +36,31 @@ public class App {
                 new Book("Deep Learning", 2016),
                 new Book("The Elements of Statistical Learning", 2001)
         };
+        ViewConsole vc=new ViewConsole();
+        BookController bc=new BookController();
+
+        vc.printMensaje("Listado de Libros");
+        vc.printArreglo(books);
+
+        vc.printMensaje("Libros Ordenados");
+        bc.sortByName(books);
+        vc.printArreglo(books);
+
+        vc.printMensaje("Busqueda de libro 'Python the best book'");
+        Book busqueda=bc.searchByName(books, "Python the best book");
+        if(busqueda==null){
+            vc.printMensaje("No se encontro el libro");
+        }
+        vc.printMensaje(busqueda.toString());
+
+        vc.printMensaje("Busqueda de libro 'Deep Learning'");
+        Book busqueda2=bc.searchByName(books, "Deep Learning");
+        if(busqueda2==null){
+            vc.printMensaje("No se encontro el libro");
+        }
+        else{
+            vc.printMensaje(busqueda2.toString());
+        }    
 
     }
 }
